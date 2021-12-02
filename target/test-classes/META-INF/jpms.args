@@ -1,0 +1,4 @@
+--patch-module
+com.turning.turningworkshop=_
+--add-reads
+com.turning.turningworkshop=ALL-UNNAMED

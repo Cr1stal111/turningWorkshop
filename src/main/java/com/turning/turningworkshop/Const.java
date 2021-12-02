@@ -5,4 +5,7 @@ public class Const {
     public static final String USER_ID = "id_user";
     public static final String USER_LOGIN = "login_user";
     public static final String USER_PASS = "password_user";
+    public static final String USER_ROLE = "role_user";
+    public static final String USER_SALARY = "salary_user";
+    public static final int TIME_ANIMATION = 2000;
 }

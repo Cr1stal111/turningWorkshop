@@ -31,6 +31,11 @@
                   <Font name="Lato Black Italic" size="19.0" />
                </font>
             </Button>
+            <Label fx:id="warn" layoutX="300.0" layoutY="210.0" style="-fx-opacity: 0;" text="Wrong login or password" textFill="#f56666">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Label layoutX="297.0" layoutY="49.0" text="Та самая токарная" textAlignment="CENTER" textFill="WHITE">

@@ -2,13 +2,20 @@ package com.turning.turningworkshop;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class SignInController {
+    
+    public static String userLogin;
 
     @FXML
     private ResourceBundle resources;
@@ -27,6 +34,9 @@ public class SignInController {
 
     @FXML
     private PasswordField pass_field;
+    
+    @FXML
+    private Label warn;
 
     @FXML
     void initialize() throws IOException {
@@ -45,7 +55,8 @@ public class SignInController {
     }
     
     @FXML
-    private void authCheckUser() throws IOException {
+    private void authCheckUser() throws IOException, SQLException, 
+            ClassNotFoundException {
         try {
             String username = login_field.getText();
             String password = pass_field.getText();
@@ -65,11 +76,37 @@ public class SignInController {
         App.setRoot("signup");
     }
 
-    private void authLogin(String loginUser, String loginPass) {
-        System.out.println("User " + loginUser + " has been logined, password - " + loginPass);
+    private void authLogin(String loginUser, String loginPass) 
+            throws SQLException, ClassNotFoundException, IOException {        
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        User user = new User(loginUser, loginPass);
+        ResultSet result = dbHandler.getUser(user);
+        
+        System.out.println(result.getStatement());
+        
+        if (result.next()) {
+            System.out.println("User " + loginUser + 
+                    " has been logined, password - " + loginPass);
+            userLogin = loginUser;
+            App.setRoot("adminPanel");
+        } else {
+            AnimationShake animationLogin = new AnimationShake(login_field);
+            AnimationShake animationPassword = new AnimationShake(pass_field);
+            animationLogin.play();
+            animationPassword.play();
+            warn.setStyle("-fx-opacity: 1");
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    warn.setStyle("-fx-opacity: 0");
+                }
+            }, Const.TIME_ANIMATION);
+        }
     }
     
-    public boolean checkUserData(String username, String password) throws IOException {
+    public boolean checkUserData(String username, String password) 
+            throws IOException {
         if ((!username.equals("") && !username.contains(" ")) 
                 && (!password.equals("") && !password.contains(" "))) {
             return true;

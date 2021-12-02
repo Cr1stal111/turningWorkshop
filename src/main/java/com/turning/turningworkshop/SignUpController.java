@@ -1,10 +1,16 @@
 package com.turning.turningworkshop;
 
+import java.io.Console;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -15,6 +21,12 @@ public class SignUpController {
 
     @FXML
     private URL location;
+    
+    @FXML
+    private Label successfullLabel;
+
+    @FXML
+    private Label errorLabel;
 
     @FXML
     private Button authSignInButton;
@@ -55,14 +67,23 @@ public class SignUpController {
     }
     
     @FXML
-    private void authSignUpUser() throws IOException {
+    private void authSignUpUser() throws IOException, SQLException, 
+            ClassNotFoundException {
         String username = login_field.getText();
         String password = pass_field.getText();
         String passConf = pass_confirm_field.getText();
         if (checkUserData(username, password, passConf)) {
             authRegisterUser(username, password);
-        } else
-            System.out.println("Error");
+        } else {
+            errorLabel.setStyle("-fx-opacity: 1");
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    errorLabel.setStyle("-fx-opacity: 0");
+                }
+            }, Const.TIME_ANIMATION);
+        }
     }
 
     @FXML
@@ -71,17 +92,27 @@ public class SignUpController {
     }
 
     private void authRegisterUser(String username, String password) {
-        DatabaseHandler dbHandler = new DatabaseHandler();
-        System.out.println("User " + username + " has been logined, password - "
-                + password);
-        dbHandler.signUpUser(username, password);
+            System.out.println("User " + username 
+                    + " has been registered, password - " + password);
+            successfullLabel.setStyle("-fx-opacity: 1");
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    successfullLabel.setStyle("-fx-opacity: 0");
+                }
+            }, Const.TIME_ANIMATION);
     }
     
     public boolean checkUserData(String username, String password, String passConf)
-            throws IOException {
+            throws IOException, ClassNotFoundException, SQLException {
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        ResultSet result = dbHandler.getLoginUser(username);
         if ((!username.equals("") && !username.contains(" ")) 
                 && (!password.equals("") && !password.contains(" "))
-                    && passConf.equals(password)) {
+                    && passConf.equals(password) && !result.next()) {
+            User user = new User(username, password);
+            dbHandler.signUpUser(user);
             return true;
         } else {
             if (username.equals("") || username.contains(" ")) {

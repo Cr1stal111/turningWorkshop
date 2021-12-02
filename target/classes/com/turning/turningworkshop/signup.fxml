@@ -36,6 +36,16 @@
                   <Font size="16.0" />
                </font>
             </PasswordField>
+            <Label id="successfullLabel" fx:id="successfullLabel" layoutX="309.0" layoutY="212.0" style="-fx-opacity: 0;" text="Successfull registered!" textFill="#33e845">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label id="errorLabel" fx:id="errorLabel" layoutX="321.0" layoutY="212.0" style="-fx-opacity: 0;" text="Something wrong..." textFill="#f5633b">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Label layoutX="297.0" layoutY="49.0" text="Та самая токарная" textAlignment="CENTER" textFill="WHITE">
