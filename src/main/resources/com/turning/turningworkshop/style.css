@@ -1,0 +1,13 @@
+.button__logout {
+    -fx-background-color: #282828;
+    -fx-border-radius: 0;
+    -fx-border-width: 3;
+    -fx-border-color: #ffffff;
+    -fx-border-style: solid;
+}
+.admin-panel__button {
+    -fx-border: none;
+    -fx-background-color: linear-gradient(to left top, #dd03e4, #5611ec);
+    -fx-font-weight: 900;
+    -fx-font-size: 12;
+}

@@ -43,7 +43,7 @@
             <Font name="Gentium Italic" size="25.0" />
          </font>
       </Label>
-      <Button fx:id="loginSignUpButton" layoutX="699.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToRegisterPage" prefHeight="34.0" prefWidth="92.0" style="-fx-background-color: #ffffff; -fx-text-fill: #0a0a0a; -fx-font-size: 16px;" text="Sign up" textAlignment="CENTER">
+      <Button fx:id="loginSignUpButton" layoutX="693.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToRegisterPage" prefHeight="34.0" prefWidth="92.0" text="Sign up" textAlignment="CENTER">
          <font>
             <Font name="Lato Regular" size="18.0" />
          </font>

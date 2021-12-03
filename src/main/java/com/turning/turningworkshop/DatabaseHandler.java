@@ -24,14 +24,15 @@ public class DatabaseHandler extends Config {
     
     public void signUpUser(User user) {
         String insert = "INSERT INTO " + Const.USER_TABLE + " (" + 
-                Const.USER_LOGIN + ", " + Const.USER_PASS + ", role_user"
-                    + ") values (?, ?, ?)";
+            Const.USER_LOGIN + ", " + Const.USER_PASS + ", " + Const.USER_SALARY
+                + ", " + Const.USER_ROLE + ") values (?, ?, ?, ?)";
         try {
             PreparedStatement prSt = getdbConnection().prepareStatement(insert);
             
             prSt.setString(1, user.getLogin());
             prSt.setString(2, user.getPassword());
-            prSt.setInt(3, 3);
+            prSt.setInt(3, (int) Math.round(25000 + Math.random() * 5000));
+            prSt.setInt(4, 3);
             prSt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,9 +67,24 @@ public class DatabaseHandler extends Config {
             PreparedStatement prSt = getdbConnection().prepareStatement(select);
             prSt.setInt(1, role_user);
             result = prSt.executeQuery();
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+        return result;
+    }
+    
+    public ResultSet getRoleId(String role) {
+        ResultSet result = null;
+        String select = "Select id_role from roles where name_role=?";
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setString(1, role);
+            result = prSt.executeQuery();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        
         return result;
     }
     
@@ -94,7 +110,7 @@ public class DatabaseHandler extends Config {
         return result;
     }
     
-    public ResultSet getLoginUser(String loginuser) throws 
+    public ResultSet getLoginUser(String login_user) throws 
             ClassNotFoundException {
         ResultSet result = null;
         
@@ -103,12 +119,65 @@ public class DatabaseHandler extends Config {
         
         try {
             PreparedStatement prSt = getdbConnection().prepareStatement(select);
-            prSt.setString(1, loginuser);
+            prSt.setString(1, login_user);
             result = prSt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
+        return result;
+    }
+    
+    public void promotionUser(String login_user, int id_role) 
+            throws SQLException, ClassNotFoundException {
+        String select = "Update " + Const.USER_TABLE + " set " + Const.USER_ROLE
+                + " =? where " + Const.USER_LOGIN + " =?";
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setInt(1, id_role);
+            prSt.setString(2, login_user);
+            prSt.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void dismissUser(String login_user) {
+        String select = "Delete from " + Const.USER_TABLE + " where " 
+                + Const.USER_LOGIN + " =?";
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setString(1, login_user);
+            prSt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public ResultSet changeUserSalary(String login_user, int salary) throws 
+            SQLException, ClassNotFoundException {
+        ResultSet result = null;
+        String select = "Update " + Const.USER_TABLE + " set " 
+                + Const.USER_SALARY + " =? where " + Const.USER_LOGIN + " =?";
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setInt(1, salary);
+            prSt.setString(2, login_user);
+            prSt.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        
+        select = "Select " + Const.USER_SALARY + " from " + Const.USER_TABLE 
+                + " where " + Const.USER_LOGIN + " =?";
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setString(1, login_user);
+            result = prSt.executeQuery();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 }
