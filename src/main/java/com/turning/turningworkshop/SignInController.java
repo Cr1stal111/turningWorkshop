@@ -88,7 +88,13 @@ public class SignInController {
             System.out.println("User " + loginUser + 
                     " has been logined, password - " + loginPass);
             userLogin = loginUser;
-            App.setRoot("adminPanel");
+            if (loginUser.equals("Admin")) 
+                App.setRoot("adminPanel");
+            else if (loginUser.equals("Director"))
+                App.setRoot("managerPanel");
+            else
+                App.setRoot("userDashboard");
+                
         } else {
             AnimationShake animationLogin = new AnimationShake(login_field);
             AnimationShake animationPassword = new AnimationShake(pass_field);

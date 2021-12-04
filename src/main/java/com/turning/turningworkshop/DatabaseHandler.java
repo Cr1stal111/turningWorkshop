@@ -44,9 +44,10 @@ public class DatabaseHandler extends Config {
     
     public ResultSet getAllUsers() throws ClassNotFoundException, SQLException {
         ResultSet result = null;
-        String select = "Select " + Const.USER_ID + ", " + Const.USER_LOGIN + 
+        String select = "Select " + Const.USER_LOGIN + 
                 ", " + Const.USER_SALARY + ", " + Const.USER_ROLE + " from " 
-                + Const.USER_TABLE + " where " + Const.USER_ID + " > 2";
+                + Const.USER_TABLE + " where " + Const.USER_LOGIN 
+                + " <> 'Admin' AND " + Const.USER_LOGIN + " <> 'Director'";
         
         try {
             PreparedStatement prSt = getdbConnection().prepareStatement(select);
@@ -179,5 +180,61 @@ public class DatabaseHandler extends Config {
             e.printStackTrace();
         }
         return result;
+    }
+    
+    public ResultSet getAllOrders() throws SQLException, ClassNotFoundException {
+        ResultSet result = null;
+        String select = "Select * from " + Const.ORDER_TABLE;
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            result = prSt.executeQuery();
+        } catch (ClassNotFoundException | SQLException e) {}
+        
+        return result;
+    }
+    
+    public void createOrder(String title, String description) 
+            throws ClassNotFoundException, SQLException {
+        String select = "Insert into " + Const.ORDER_TABLE + " (" 
+                + Const.ORDER_TITLE + ", " + Const.ORDER_DESCRIPTION + ", " 
+                + Const.ORDER_STATUS + ") values (?, ?, ?)";
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setString(1, title);
+            prSt.setString(2, description);
+            prSt.setString(3, "free");
+            prSt.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {}
+    }
+    
+    public void createOrder(String title, String description, String user) 
+            throws ClassNotFoundException, SQLException {
+        String select = "Insert into " + Const.ORDER_TABLE + " (" 
+                + Const.ORDER_TITLE + ", " + Const.ORDER_DESCRIPTION + ", " 
+                + Const.ORDER_USER + ", " + Const.ORDER_STATUS 
+                + ") values (?, ?, ?, ?)";
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setString(1, title);
+            prSt.setString(2, description);
+            prSt.setString(3, user);
+            prSt.setString(4, "occupied");
+            prSt.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {}
+    }
+    
+    public void dropOrder(int id_order) throws ClassNotFoundException, 
+            SQLException {
+        String select = "Delete from " + Const.ORDER_TABLE + " where "
+                + Const.ORDER_ID + " =?";
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setInt(1, id_order);
+            prSt.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {}
     }
 }

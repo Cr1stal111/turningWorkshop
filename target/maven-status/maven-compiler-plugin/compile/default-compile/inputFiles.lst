@@ -1,6 +1,7 @@
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/AnimationShake.java
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/Const.java
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/SignInController.java
+/home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/Order.java
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/DatabaseHandler.java
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/module-info.java
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/SignUpController.java
@@ -8,3 +9,4 @@
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/App.java
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/AdminController.java
 /home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/Config.java
+/home/winston/NetBeansProjects/turningWorkshop/src/main/java/com/turning/turningworkshop/ManagerController.java

@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -66,7 +67,7 @@ public class AdminController {
     private TextField inputSalaryField;
 
     @FXML
-    private ChoiceBox<String> listUsersDropBlock;
+    private ComboBox<String> listUsersDropBlock;
 
     @FXML
     private Button logoutUserButton;
@@ -280,7 +281,6 @@ public class AdminController {
         listUsers = new ArrayList<>();
         listUsersLogin = FXCollections.observableArrayList();
         for (; resultUsers.next();) {
-            int id_user = resultUsers.getInt("id_user");
             String login_user = resultUsers.getString("login_user");
             user_role = resultUsers.getInt("role_user");
             int salary_role = resultUsers.getInt("salary_user");
@@ -291,7 +291,7 @@ public class AdminController {
             }
             
             listUsersLogin.add(login_user);
-            User user = new User(id_user, login_user, role_name, salary_role);
+            User user = new User(login_user, role_name, salary_role);
             listUsers.add(user);
         }
     }

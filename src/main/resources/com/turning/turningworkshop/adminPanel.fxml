@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,7 +24,7 @@
                </children>
             </Pane>
             <VBox prefHeight="500.0" prefWidth="74.0" style="-fx-background-color: #131022; -fx-background-radius: 20 0 0 20;" />
-            <AnchorPane layoutX="109.0" layoutY="71.0" prefHeight="406.0" prefWidth="666.0" style="-fx-background-color: #131022; -fx-background-radius: 20;">
+            <AnchorPane layoutX="109.0" layoutY="73.0" prefHeight="406.0" prefWidth="666.0" style="-fx-background-color: #131022; -fx-background-radius: 20;">
                <children>
                   <Label layoutX="37.0" layoutY="31.0" text="Панель управления " textFill="WHITE" />
                   <Label layoutX="177.0" layoutY="31.0" text="работниками" textFill="#fff370" />
@@ -52,7 +52,6 @@
                         <Label fx:id="labelUserSalary" layoutX="222.0" layoutY="23.0" textFill="WHITE" />
                      </children>
                   </Pane>
-                  <ChoiceBox fx:id="listUsersDropBlock" layoutX="83.0" layoutY="191.0" prefHeight="24.0" prefWidth="259.0" />
                   <Pane fx:id="buttonsBlock" layoutX="434.0" layoutY="116.0" prefHeight="238.0" prefWidth="211.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;">
                      <children>
                         <Button fx:id="userPromotionButton" layoutX="17.0" layoutY="19.0" mnemonicParsing="false" onAction="#userPromotionAction" prefHeight="30.0" prefWidth="183.0" styleClass="admin-panel__button" text="Повысить в должности" textFill="WHITE" />
@@ -68,9 +67,10 @@
                      <children>
                         <Label fx:id="labelSalaryText" layoutX="69.0" layoutY="6.0" text="На сколько?" textFill="WHITE" />
                         <Label fx:id="labelSalaryPlanted" layoutX="33.0" layoutY="31.0" text="Установлена новая з/п" textFill="#22da06" />
-                        <TextField fx:id="inputSalaryField" layoutX="15.0" layoutY="24.0" prefHeight="30.0" prefWidth="193.0" />
+                        <TextField fx:id="inputSalaryField" layoutX="15.0" layoutY="24.0" prefHeight="30.0" prefWidth="193.0" promptText="1 - 10 000" />
                      </children>
                   </Pane>
+                  <ComboBox fx:id="listUsersDropBlock" layoutX="93.0" layoutY="189.0" prefHeight="27.0" prefWidth="238.0" />
                </children></AnchorPane>
             <Label id="userLoginnedLabel" fx:id="userLoginnedLabel" layoutX="109.0" layoutY="27.0" text="Welcome, user!" textFill="WHITE" />
          </children>
