@@ -237,4 +237,47 @@ public class DatabaseHandler extends Config {
             prSt.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {}
     }
+    
+    public ResultSet getFreeOrders() throws SQLException, ClassNotFoundException {
+        ResultSet result = null;
+        String select = "Select * from " + Const.ORDER_TABLE + " where " 
+                + Const.ORDER_STATUS + " = 'free'";
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            result = prSt.executeQuery();
+        } catch (ClassNotFoundException | SQLException e) {}
+        
+        return result;
+    }
+    
+    public ResultSet checkUserOrder(String login_user) throws SQLException, 
+            ClassNotFoundException {
+        ResultSet result = null;
+        String select = "Select * from " + Const.ORDER_TABLE + " where " 
+                + Const.ORDER_USER + " =? AND " + Const.ORDER_STATUS 
+                + " <> 'completed'";
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setString(1, login_user);
+            result = prSt.executeQuery();
+        } catch (ClassNotFoundException | SQLException e) {}
+        return result;
+    }
+    
+    public void changeOrderStatus(String login_user, int id_order, 
+            String status_order) throws ClassNotFoundException, SQLException {
+        String select = "update " + Const.ORDER_TABLE + " set " 
+                + Const.ORDER_USER + " =?, " + Const.ORDER_STATUS 
+                + " =? where " + Const.ORDER_ID + " =?";
+        
+        try {
+            PreparedStatement prSt = getdbConnection().prepareStatement(select);
+            prSt.setString(1, login_user);
+            prSt.setString(2, status_order);
+            prSt.setInt(3, id_order);
+            prSt.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {}
+    }
 }

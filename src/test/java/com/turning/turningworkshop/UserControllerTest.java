@@ -4,8 +4,8 @@
  */
 package com.turning.turningworkshop;
 
-import java.io.IOException;
 import java.sql.SQLException;
+import javafx.event.ActionEvent;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,15 +17,18 @@ import static org.junit.Assert.*;
  *
  * @author winston
  */
-public class SignUpControllerTest {
+public class UserControllerTest {
     
-    SignUpController signUpClass = new SignUpController();
+    static String login_user = "";
     
-    public SignUpControllerTest() {
-    } 
+    UserController controller = new UserController();
+    
+    public UserControllerTest() {
+    }
     
     @BeforeClass
     public static void setUpClass() {
+        login_user = "user1";
     }
     
     @AfterClass
@@ -34,19 +37,24 @@ public class SignUpControllerTest {
     
     @Before
     public void setUp() {
-        
     }
     
     @After
     public void tearDown() {
     }
-    
+
+    /**
+     * Test of logoutUserFromDashboard method, of class UserController.
+     * @param login_user
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
     @Test
-    public void checkUserDataTest() throws IOException, 
-            ClassNotFoundException, SQLException {
-        boolean userHasBeenRegistered = signUpClass
-                .checkUserData("Admin", "admin", "admin");
-        assertFalse(userHasBeenRegistered);
+    public void checkUserFreeTest() throws SQLException, 
+            ClassNotFoundException {
+        boolean userHasOrder = controller.checkUserFree(login_user);
+        
+        assertEquals(true, userHasOrder);
     }
     
 }

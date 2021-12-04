@@ -76,15 +76,10 @@ public class SignInController {
         App.setRoot("signup");
     }
 
-    private void authLogin(String loginUser, String loginPass) 
-            throws SQLException, ClassNotFoundException, IOException {        
-        DatabaseHandler dbHandler = new DatabaseHandler();
-        User user = new User(loginUser, loginPass);
-        ResultSet result = dbHandler.getUser(user);
+    private void authLogin(String loginUser, String loginPass) throws 
+            SQLException, ClassNotFoundException, IOException {
         
-        System.out.println(result.getStatement());
-        
-        if (result.next()) {
+        if (checkUserFromDatabase(loginUser, loginPass)) {
             System.out.println("User " + loginUser + 
                     " has been logined, password - " + loginPass);
             userLogin = loginUser;
@@ -109,6 +104,15 @@ public class SignInController {
                 }
             }, Const.TIME_ANIMATION);
         }
+    }
+    
+    public boolean checkUserFromDatabase(String loginUser, String loginPass) 
+            throws SQLException, ClassNotFoundException, IOException {        
+        DatabaseHandler dbHandler = new DatabaseHandler();
+        User user = new User(loginUser, loginPass);
+        ResultSet result = dbHandler.getUser(user);
+        
+        return result.next();
     }
     
     public boolean checkUserData(String username, String password) 

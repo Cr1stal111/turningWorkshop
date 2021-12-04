@@ -17,12 +17,12 @@ import static org.junit.Assert.*;
  *
  * @author winston
  */
-public class SignUpControllerTest {
+public class SignInControllerTest {
     
-    SignUpController signUpClass = new SignUpController();
+    SignInController signInController = new SignInController();
     
-    public SignUpControllerTest() {
-    } 
+    public SignInControllerTest() {
+    }
     
     @BeforeClass
     public static void setUpClass() {
@@ -34,19 +34,18 @@ public class SignUpControllerTest {
     
     @Before
     public void setUp() {
-        
     }
     
     @After
     public void tearDown() {
     }
-    
+
     @Test
-    public void checkUserDataTest() throws IOException, 
-            ClassNotFoundException, SQLException {
-        boolean userHasBeenRegistered = signUpClass
-                .checkUserData("Admin", "admin", "admin");
-        assertFalse(userHasBeenRegistered);
+    public void checkUserExistTest() throws IOException, SQLException, 
+            ClassNotFoundException {
+        boolean userExist = signInController.checkUserFromDatabase("Admin", 
+                "admin");
+        assertTrue(userExist);
     }
     
 }

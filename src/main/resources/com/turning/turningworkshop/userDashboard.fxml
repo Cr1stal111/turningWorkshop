@@ -3,14 +3,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.turning.turningworkshop.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.turning.turningworkshop.UserController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #030307; -fx-background-radius: 20;" stylesheets="@style.css">
          <children>
@@ -27,50 +25,43 @@
             <AnchorPane layoutX="109.0" layoutY="73.0" prefHeight="406.0" prefWidth="666.0" style="-fx-background-color: #131022; -fx-background-radius: 20;">
                <children>
                   <Label layoutX="37.0" layoutY="31.0" text="Панель управления " textFill="WHITE" />
-                  <Label layoutX="177.0" layoutY="31.0" text="работниками" textFill="#fff370" />
-                  <Line endX="-23.0" endY="187.0" layoutX="433.0" layoutY="166.0" startX="-23.0" startY="-114.0" stroke="#b9b1b1" />
-                  <Label layoutX="490.0" layoutY="59.0" text="Операции над" textFill="WHITE" />
-                  <Label layoutX="480.0" layoutY="75.0" text="работниками" textFill="#fff370">
+                  <Label layoutX="177.0" layoutY="31.0" text="пользователя" textFill="#fff370" />
+                  <Label layoutX="212.0" layoutY="74.0" text="Список свободных заказов" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="125.0" layoutY="145.0" text="Список работников" textFill="WHITE">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <Pane fx:id="userBlockInfo" layoutX="59.0" layoutY="269.0" prefHeight="62.0" prefWidth="306.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;">
+                  <Pane fx:id="buttonsBlock" layoutX="51.0" layoutY="267.0" prefHeight="112.0" prefWidth="547.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;">
                      <children>
-                        <Label fx:id="labelUserId" layoutX="14.0" layoutY="23.0" textFill="#fffb08">
+                        <Button fx:id="acceptOrderButton" layoutX="14.0" layoutY="67.0" mnemonicParsing="false" onAction="#acceptOrderAction" prefHeight="30.0" prefWidth="162.0" styleClass="admin-panel__button" text="Взять на исполнение" textFill="WHITE" />
+                        <Button fx:id="rejectOrderButton" layoutX="192.0" layoutY="67.0" mnemonicParsing="false" onAction="#rejectOrderAction" prefHeight="30.0" prefWidth="162.0" styleClass="admin-panel__button" text="Отказаться" textFill="WHITE" />
+                        <Label layoutX="224.0" layoutY="22.0" text="Операции над" textFill="WHITE" />
+                        <Label layoutX="237.0" layoutY="38.0" text="заказом" textFill="#fff370">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelUserName" layoutX="41.0" layoutY="15.0" textFill="#0b9ef9" />
-                        <Label fx:id="labelUserRole" layoutX="41.0" layoutY="36.0" textFill="WHITE" />
-                        <Label fx:id="labelUserSalary" layoutX="222.0" layoutY="23.0" textFill="WHITE" />
+                        <Button fx:id="completeOrderButton" layoutX="370.0" layoutY="67.0" mnemonicParsing="false" onAction="#completeOrderAction" prefHeight="30.0" prefWidth="162.0" styleClass="admin-panel__button" text="Заказ выполнен" textFill="WHITE" />
                      </children>
                   </Pane>
-                  <Pane fx:id="buttonsBlock" layoutX="434.0" layoutY="116.0" prefHeight="238.0" prefWidth="211.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;">
+                  <ComboBox fx:id="listFreeOrdersDropBlock" layoutX="149.0" layoutY="108.0" prefHeight="31.0" prefWidth="368.0" styleClass="list__orders" />
+                  <Pane layoutX="148.0" layoutY="148.0" prefHeight="109.0" prefWidth="368.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;">
                      <children>
-                        <Button fx:id="userPromotionButton" layoutX="17.0" layoutY="19.0" mnemonicParsing="false" onAction="#userPromotionAction" prefHeight="30.0" prefWidth="183.0" styleClass="admin-panel__button" text="Повысить в должности" textFill="WHITE" />
-                        <Button fx:id="userDismissButton" layoutX="17.0" layoutY="188.0" mnemonicParsing="false" onAction="#userDismissAction" prefHeight="30.0" prefWidth="183.0" styleClass="admin-panel__button" text="Уволить сотрудника" textFill="WHITE" />
-                        <Button fx:id="salaryDecreaseButton" layoutX="17.0" layoutY="104.0" mnemonicParsing="false" onAction="#salaryDecreaseAction" prefHeight="30.0" prefWidth="183.0" styleClass="admin-panel__button" text="Понизить зарплату" textFill="WHITE" />
-                        <Button fx:id="salaryIncreaseButton" layoutX="17.0" layoutY="61.0" mnemonicParsing="false" onAction="#salaryIncreaseAction" prefHeight="30.0" prefWidth="183.0" styleClass="admin-panel__button" text="Поднять зарплату" textFill="WHITE" />
-                        <Button fx:id="userDecreaseButton" layoutX="17.0" layoutY="147.0" mnemonicParsing="false" onAction="#userDecreaseAction" prefHeight="30.0" prefWidth="183.0" styleClass="admin-panel__button" text="Понизить в должности" textFill="WHITE" />
+                        <Label fx:id="labelOrderId" layoutX="8.0" layoutY="44.0" textFill="#fffb08">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelOrderTitle" layoutX="28.0" layoutY="15.0" prefHeight="18.0" prefWidth="325.0" textFill="#0b9ef9">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelOrderDescription" alignment="TOP_LEFT" layoutX="28.0" layoutY="36.0" prefHeight="40.0" prefWidth="325.0" textFill="WHITE" textOverrun="CLIP" wrapText="true" />
+                        <Label fx:id="labelOrderStatus" alignment="BOTTOM_RIGHT" layoutX="244.0" layoutY="76.0" prefHeight="16.0" prefWidth="95.0" textFill="WHITE" />
+                        <Label fx:id="labelFreeUser" layoutX="55.0" layoutY="46.0" text="Выберите свободный заказ из списка" textFill="#25e111" />
                      </children>
                   </Pane>
-                  <Label fx:id="labelHighestPost" layoutX="112.0" layoutY="235.0" text="Достигнута высшая должность!" textFill="#ff4e4e" />
-                  <Label fx:id="labelLowestPost" layoutX="113.0" layoutY="235.0" text="Достигнута низшая должность!" textFill="#ff4e4e" />
-                  <Pane fx:id="salaryPlantBlock" layoutX="101.0" layoutY="65.0" prefHeight="62.0" prefWidth="222.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;">
-                     <children>
-                        <Label fx:id="labelSalaryText" layoutX="69.0" layoutY="6.0" text="На сколько?" textFill="WHITE" />
-                        <Label fx:id="labelSalaryPlanted" layoutX="33.0" layoutY="31.0" text="Установлена новая з/п" textFill="#22da06" />
-                        <TextField fx:id="inputSalaryField" layoutX="15.0" layoutY="24.0" prefHeight="30.0" prefWidth="193.0" promptText="1 - 10 000" />
-                     </children>
-                  </Pane>
-                  <ComboBox fx:id="listUsersDropBlock" layoutX="93.0" layoutY="189.0" prefHeight="27.0" prefWidth="238.0" />
                </children></AnchorPane>
             <Label id="userLoginnedLabel" fx:id="userLoginnedLabel" layoutX="109.0" layoutY="27.0" text="Welcome, user!" textFill="WHITE" />
          </children>
