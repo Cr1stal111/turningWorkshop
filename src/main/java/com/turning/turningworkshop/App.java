@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 
 public class App extends Application {
 
@@ -17,6 +18,10 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("signin"), 800, 500);
         stage.setScene(scene);
+        stage.getIcons().add(new Image("https://encrypted-tbn0.gstatic.com"
+                + "/images?q=tbn:ANd9GcRS_0hPCtow4w5xF6hwBZfAqYgF_3OrlPGBNzcUxu"
+                + "Mbjp2NiEjOggLfmGEoGy4D4V2pMnU&usqp=CAU"));
+        stage.setTitle("Turning workshop");
         stage.show();
         
         stage.setOnCloseRequest(event -> {
