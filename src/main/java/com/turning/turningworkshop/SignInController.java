@@ -1,14 +1,11 @@
 package com.turning.turningworkshop;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,19 +13,7 @@ import javafx.scene.control.TextField;
 public class SignInController {
     
     public static String userLogin;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private Button authSignInButton;
-
-    @FXML
-    private Button loginSignUpButton;
-
+    
     @FXML
     private TextField login_field;
 
@@ -60,9 +45,7 @@ public class SignInController {
         try {
             String username = login_field.getText();
             String password = pass_field.getText();
-            if (checkUserData(username, password)) {
-                authLogin(username, password);
-            }
+            authLogin(username, password);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error");
@@ -114,19 +97,5 @@ public class SignInController {
         
         return result.next();
     }
-    
-    public boolean checkUserData(String username, String password) 
-            throws IOException {
-        if ((!username.equals("") && !username.contains(" ")) 
-                && (!password.equals("") && !password.contains(" "))) {
-            return true;
-        } else {
-            if (username.equals("") || username.contains(" ")) {
-                authLoginController();
-            } else if (password.equals("") || password.contains(" ")) {
-                authPassController();
-            }
-            return false;
-        }
-    }
+
 }

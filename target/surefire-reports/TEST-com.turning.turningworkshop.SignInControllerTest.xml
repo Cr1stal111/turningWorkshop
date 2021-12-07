@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.turning.turningworkshop.SignInControllerTest" time="0.018" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.turning.turningworkshop.SignInControllerTest" time="0.026" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.13+8-post-Debian-1"/>
@@ -35,7 +35,7 @@
     <property name="java.class.version" value="55.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="5.14.0-kali2-amd64"/>
+    <property name="os.version" value="5.14.0-kali4-amd64"/>
     <property name="library.jansi.path" value="/home/winston/Загрузки/apache-maven-3.8.3/lib/jansi-native"/>
     <property name="user.home" value="/home/winston"/>
     <property name="user.timezone" value="Europe/Moscow"/>
@@ -63,5 +63,5 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.turning.turningworkshop.SignInControllerTest" name="checkUserExistTest" time="0.018"/>
+  <testcase classname="com.turning.turningworkshop.SignInControllerTest" name="checkUserExistTest" time="0.026"/>
 </testsuite>

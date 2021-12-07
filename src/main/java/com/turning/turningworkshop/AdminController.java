@@ -1,11 +1,9 @@
 package com.turning.turningworkshop;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -14,8 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -29,12 +25,6 @@ public class AdminController {
         .observableArrayList();
     
     private int user_role;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Pane buttonsBlock;
@@ -70,31 +60,10 @@ public class AdminController {
     private ComboBox<String> listUsersDropBlock;
 
     @FXML
-    private Button logoutUserButton;
-
-    @FXML
-    private Button salaryDecreaseButton;
-
-    @FXML
-    private Button salaryIncreaseButton;
-
-    @FXML
-    private Pane userBlockInfo;
-    
-    @FXML
     private Pane salaryPlantBlock;
 
     @FXML
-    private Button userDecreaseButton;
-
-    @FXML
-    private Button userDismissButton;
-
-    @FXML
     private Label userLoginnedLabel;
-
-    @FXML
-    private Button userPromotionButton;
 
     @FXML
     void initialize() throws ClassNotFoundException, SQLException {
@@ -130,9 +99,6 @@ public class AdminController {
             buttonsBlock.setStyle("-fx-opacity: 1;");
         });
     }
-    
-    @FXML
-    private void checkUserLoginnedLabel() {}
     
     @FXML
     private void userPromotionAction() throws SQLException, 

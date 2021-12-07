@@ -6,47 +6,34 @@ package com.turning.turningworkshop;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author winston
- */
 public class SignUpControllerTest {
     
     SignUpController signUpClass = new SignUpController();
     
-    public SignUpControllerTest() {
-    } 
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-        
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    
     @Test
-    public void checkUserDataTest() throws IOException, 
+    public void checkUserSignUpAdminTest() throws IOException, 
             ClassNotFoundException, SQLException {
         boolean userHasBeenRegistered = signUpClass
-                .checkUserData("Admin", "admin", "admin");
+                .checkUserData("Admin", "root", "root");
         assertFalse(userHasBeenRegistered);
     }
-    
+    @Test
+    public void checkUserSignUpTest() throws IOException, 
+            ClassNotFoundException,
+            SQLException {
+        boolean userHasBeenRegistered = signUpClass
+                .checkUserData("user10", ")(*&^%$#@!", ")(*&^%$#@!");
+        assertEquals(false, userHasBeenRegistered);
+    }
+    @Test
+    public void createUserStartWithNumberTest() throws IOException, 
+            ClassNotFoundException,
+            SQLException {
+        boolean userHasBeenRegistered = signUpClass
+                .checkUserData("111", "pass", "pass");
+        assertFalse(userHasBeenRegistered);
+    }
 }

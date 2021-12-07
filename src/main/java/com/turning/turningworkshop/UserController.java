@@ -1,11 +1,9 @@
 package com.turning.turningworkshop;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,12 +28,6 @@ public class UserController {
     private ResultSet resultUserOrder;
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private Button acceptOrderButton;
 
     @FXML
@@ -58,9 +50,6 @@ public class UserController {
 
     @FXML
     private ComboBox<String> listFreeOrdersDropBlock;
-
-    @FXML
-    private Button logoutUserButton;
 
     @FXML
     private Button rejectOrderButton;

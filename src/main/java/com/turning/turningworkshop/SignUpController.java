@@ -1,38 +1,22 @@
 package com.turning.turningworkshop;
 
-import java.io.Console;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class SignUpController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
     
     @FXML
     private Label successfullLabel;
 
     @FXML
     private Label errorLabel;
-
-    @FXML
-    private Button authSignInButton;
-
-    @FXML
-    private Button loginSignUpButton;
 
     @FXML
     private TextField login_field;
@@ -44,9 +28,7 @@ public class SignUpController {
     private PasswordField pass_field;
 
     @FXML
-    void initialize() {
-        
-    }
+    void initialize() {}
     
     @FXML
     public void authLoginController() {
@@ -92,6 +74,9 @@ public class SignUpController {
     }
 
     private void authRegisterUser(String username, String password) {
+            DatabaseHandler dbHandler = new DatabaseHandler();
+            User user = new User(username, password);
+            dbHandler.signUpUser(user);
             System.out.println("User " + username 
                     + " has been registered, password - " + password);
             successfullLabel.setStyle("-fx-opacity: 1");
@@ -104,15 +89,21 @@ public class SignUpController {
             }, Const.TIME_ANIMATION);
     }
     
-    public boolean checkUserData(String username, String password, String passConf)
-            throws IOException, ClassNotFoundException, SQLException {
+    public boolean checkUserData(String username, String password, 
+            String passConf) throws IOException, 
+            ClassNotFoundException, SQLException {
+        String symbols[] = {")", "(", "*", "&", "^", "%", "$", "#", "@", "!"};
+        String numbers[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
         DatabaseHandler dbHandler = new DatabaseHandler();
         ResultSet result = dbHandler.getLoginUser(username);
-        if ((!username.equals("") && !username.contains(" ")) 
-                && (!password.equals("") && !password.contains(" "))
-                    && passConf.equals(password) && !result.next()) {
-            User user = new User(username, password);
-            dbHandler.signUpUser(user);
+        for (int i = 0; i < numbers.length; i++) {
+            if (username.startsWith(numbers[i]) || username.contains(symbols[i])
+                    || password.contains(symbols[i])) 
+                return false;
+        }
+        if ((!username.equals("") && !username.contains(" ") && !username
+               .contains("Admin")) && (!password.equals("") && !password
+               .contains(" ")) && passConf.equals(password) && !result.next()) {
             return true;
         } else {
             if (username.equals("") || username.contains(" ")) {
